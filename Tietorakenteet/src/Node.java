@@ -1,30 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 public class Node {
-    private String data;
+    private int data;
     private BinaryTree left;
     private BinaryTree right;
     private int height;
     private int balance;
 
-    public Node(String value) {
-        data = new String(value);
+    public Node(int value) {
+        data = value;
         left = right = null;
         checkHeight();
     }
-    public  Node (String value, BinaryTree left, BinaryTree right) {
-        data = new String(value);
+    public  Node (int value, BinaryTree left, BinaryTree right) {
+        data = value;
         this.left = left;
         this.right = right;
         checkHeight();
     }
-    public String getData() {
+    public int getData() {
         return data;
     }
-    public void setData(String s)
+    public void setData(int s)
     {
         data = s;
     }
