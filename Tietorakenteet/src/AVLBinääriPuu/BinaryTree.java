@@ -1,8 +1,5 @@
 package AVLBin‰‰riPuu;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 
 public class BinaryTree {
@@ -54,7 +51,7 @@ public class BinaryTree {
             {
                 BinaryTree b = new BinaryTree(aData);
                 root.setRight(b);
-                this.recalculateHeight(); //rekursiivinen
+                this.recalculateHeight();
                 return true;
             }
         }
@@ -103,7 +100,6 @@ public class BinaryTree {
         boolean res;
         if(this.root.getData()==aData)
         {
-            System.out.println("data == data");
             if (root.left() != null && root.right() != null) { //kaksi lasta
                 int temp = root.right().FindMin();
                 root.right().remove(temp, root);
@@ -164,11 +160,30 @@ public class BinaryTree {
         }
     }
 
+    public int[] preOrderArray(int[] array){
+        fill_array(array, 0);
+        return array;
+    }
+
+    private int fill_array(int[] array, int index){
+        if (root != null) {
+            array[index] = root.getData();
+            index++;
+            if (root.left() != null){
+                index = root.left().fill_array(array, index);
+            }
+            if (root.right() != null){
+                index = root.right().fill_array(array, index);
+            }
+        }
+        return index;
+    }
+
     public void innerOrder(){
         if(root!=null){
             if(root.left()!=null)
                 root.left().innerOrder();
-     //       System.out.println(root.getData());
+            //System.out.println(root.getData());
             if(root.right()!=null)
                 root.right().innerOrder();
         }
@@ -196,12 +211,10 @@ public class BinaryTree {
         int oikea = root.right()==null ? -1 : root.right().root.getHeight();
         root.setHeight(1+Math.max(vasen , oikea));
         root.setBalance(vasen-oikea);
-        if(root.getBalance() <= 1 && root.getBalance() >= -1)
-            return;
-        else{
-            do{
+        if(root.getBalance() > 1 || root.getBalance() < -1){
+        	do{
                 AVL_Check();
-            }while(root.getBalance() >= 1 || root.getBalance() <= -1);
+            }while(root.getBalance() > 1 || root.getBalance() < -1);
         }
     }
 
@@ -211,9 +224,10 @@ public class BinaryTree {
             return;
         if(root.getBalance()>=1)
         {
+
             if(root.left()!=null && root.getBalance()>1)
-                root.left().AVL_Check();
-            if(root.left().root.right()!=null && root.left().root.left()==null)
+            	root.left().AVL_Check();
+            if(root.left().root.right()!=null && root.left().root.left()==null && root.right()==null)
             {
                 leftRotation(root.left(), root.left().root.right());
             }
@@ -221,9 +235,9 @@ public class BinaryTree {
         }else{
             if(root.right()!=null && root.getBalance()<-1)
                 root.right().AVL_Check();
-            if(root.right().root.left()!=null && root.right().root.right()==null)
+            if(root.right().root.left()!=null && root.right().root.right()==null && root.left()==null)
             {
-                rightRotation(root.right(), root.right().root.left());
+                rightRotation(this.root.right(), this.root.right().root.left());
             }
             leftRotation(this, root.right());
         }
@@ -231,7 +245,6 @@ public class BinaryTree {
 
     public void rightRotation(BinaryTree Parent,BinaryTree LeftChild)
     {
-        //System.out.println("Parent : " + Parent.root.getData() + " LeftChild " + LeftChild.root.getData());
         int temp = Parent.root.getData();
         Parent.root.setData(LeftChild.root.getData());
         Parent.root.setLeft(LeftChild.root.left());
@@ -239,13 +252,12 @@ public class BinaryTree {
         LeftChild.setLeft(LeftChild.root.right());
         LeftChild.setRight(Parent.root.right());
         Parent.root.setRight(LeftChild);
-        LeftChild.root.checkHeight();
-        Parent.root.checkHeight();
+    	LeftChild.root.checkHeight();
+    	Parent.root.checkHeight();
     }
 
     public void leftRotation(BinaryTree Parent,BinaryTree RightChild)
     {
-        //System.out.println("Parent : " + Parent.root.getData() + " LeftChild " + RightChild.root.getData());
         int temp = Parent.root.getData();
         Parent.root.setData(RightChild.root.getData());
         Parent.root.setRight(RightChild.root.right());
@@ -260,6 +272,17 @@ public class BinaryTree {
     public Node getRoot()
     {
         return root;
+    }
+
+    public int getSize(){
+    	int size=1;
+    	if (root != null) {
+            if (root.left() != null)
+                size += root.left().getSize();
+            if (root.right() != null)
+                size += root.right().getSize();
+        }
+    	return size;
     }
 
 }

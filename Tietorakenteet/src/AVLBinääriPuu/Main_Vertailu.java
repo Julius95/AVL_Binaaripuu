@@ -30,17 +30,9 @@ public class Main_Vertailu {
         for(int i : taulukko){
             tree.add(i);
         }
-        for(Object i : tree){
-            //System.out.println(i);
-        }
+        for(Object i : tree){}
         A2 = System.currentTimeMillis();
-        ///////////////////////////////////////
 
-
-//        Iterator<Integer> iterator = tree.iterator();
-//	while (iterator.hasNext()) {
-//		System.out.println(iterator.next() + " ");
-//	}
 
         try {
             Thread.sleep(100);
@@ -54,9 +46,8 @@ public class Main_Vertailu {
         }
         t.innerOrder();
         B2 = System.currentTimeMillis();
-        /////////////////////////////////////
+
         System.out.println("A Lopputulos : " + (A2-A1) + " B : " + (B2-B1));
-        //t.innerOrder();
-	}
+    }
 
 }

@@ -97,9 +97,10 @@ public class Main {
         //String lause = "3+4*2/(1-5)"; //3,4,2,*,1,5,-,/,+ = 1
         //String lause = "1/2-3+4*5-6*7";
         //String lause = "(1+(2+3))"; //1,2,3,+,+
-        String lause = "((1+2)*(3+4))"; //12+34+* = 21
+        //String lause = "((1+2)*(3+4))"; //12+34+* = 21
         //String lause = "((((((1+2)+3)+4)+5)+6)+7)"; //1 2 + 3 + 4 + 5 + 6 + 7 + = 28
-
+        String lause = "2+2^2-0*3*2*4";
+        //        System.out.println(calc.laske(lause));
         list = lause.toCharArray();
         for (char c : list){
             if(Character.isDigit(c)) //on numero
@@ -126,7 +127,7 @@ public class Main {
             System.out.print(it2.next()+",");
         }
         System.out.println();
-        System.out.println("Result : " + calc.laske(s2));
+        System.out.println("Result : " + calc.laske1(s2));
 
     }
     //System.out.println((int)Character.valueOf(c) + " " + (int)Character.valueOf((char)s2.firstElement()));
